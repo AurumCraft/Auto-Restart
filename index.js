@@ -5,8 +5,8 @@ var time_ms = ((config.time.day * 24 + config.time.hour) * 60 + config.time.min)
 var restartTimeout;
 
 function Restart() {
-  var i = 10;
-  var int = setInterval(() => {
+  var i = 10,
+  int = setInterval(() => {
     mc.broadcast(`${config.title} Перезапуск через §f-§e ${i} сек.`, 5);
     if (i == 0) { clearInterval(int);
       mc.getOnlinePlayers().forEach((pl) => pl.disconnect(`§l§e     Перезагрузка..\n§fВозвращайся через минуту!.`));
