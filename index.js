@@ -1,8 +1,7 @@
 const { clearInterval } = require("timers");
 const { config } = require("./manifest.json");
 
-var time_ms = ((config.time.day * 24 + config.time.hour) * 60 + config.time.min) * 60 * 1000 + config.time.sec * 1000;
-var restartTimeout;
+var time_ms = ((config.time.day * 24 + config.time.hour) * 60 + config.time.min) * 60 * 1000 + config.time.sec * 1000, restartTimeout;
 
 function Restart() {
   var i = 10,
@@ -17,7 +16,7 @@ function Restart() {
 
 mc.listen("onServerStarted", () => {
   var restart = mc.newCommand("restart", "Досрочный перезапуск сервера.", PermType.GameMasters);
-  restart.setCallback((_cmd, _ori, out, res) => Restart()); restart.overload([]); restart.setup();
+  restart.setCallback((_cmd, _ori) => Restart()); restart.overload([]); restart.setup();
   log(`Отсчёт до рестрата запущен! Время: ${time_ms}ms. (Дни: ${config.time.day}, Часы: ${config.time.hour}, Минуты: ${config.time.min}, Секунды: ${config.time.sec})`);
   restartTimeout = setTimeout(() => Restart(), time_ms);
 });
