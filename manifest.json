@@ -1,0 +1,18 @@
+{
+    "name": "AurumCraft-AutoRestart",
+    "version": "0.0.1-alpha",
+    "entry": "index.js",
+    "type": "lse-nodejs",
+    "dependencies": [
+        {
+            "name": "legacy-script-engine-nodejs"
+        }
+    ],
+    "config": {
+        "title": "§eAurum§fCraft §d»§e",
+        "time": {
+            "day": 0, "hour": 6,
+            "min": 0, "sec": 0
+        }
+    }
+}
