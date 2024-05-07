@@ -17,6 +17,6 @@ function Restart() {
 mc.listen("onServerStarted", () => {
   var restart = mc.newCommand("restart", "Досрочный перезапуск сервера.", PermType.GameMasters);
   restart.setCallback((_cmd, _ori) => Restart()); restart.overload([]); restart.setup();
-  log(`Отсчёт до рестрата запущен! Время: ${time_ms}ms. (Дни: ${config.time.day}, Часы: ${config.time.hour}, Минуты: ${config.time.min}, Секунды: ${config.time.sec})`);
+  log(`Отсчёт до рестарта запущен! Время: ${time_ms}ms. (Дни: ${config.time.day}, Часы: ${config.time.hour}, Минуты: ${config.time.min}, Секунды: ${config.time.sec})`);
   restartTimeout = setTimeout(() => Restart(), time_ms);
 });
