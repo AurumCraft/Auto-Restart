@@ -1,22 +1,35 @@
-const { clearInterval } = require("timers");
 const { config } = require("./manifest.json");
 
-var time_ms = ((config.time.day * 24 + config.time.hour) * 60 + config.time.min) * 60 * 1000 + config.time.sec * 1000, restartTimeout;
+let restartTime = ((config.time.day * 24 + config.time.hour) * 60 + config.time.min) * 60 * 1000 + config.time.sec * 1000;
+let restartTimer;
 
-function Restart() {
-  var i = 10,
-  int = setInterval(() => {
-    mc.broadcast(`${config.title} Перезапуск через §f-§e ${i} сек.`, 5);
-    if (i == 0) { clearInterval(int);
-      mc.getOnlinePlayers().forEach((pl) => pl.disconnect(`§l§e     Перезагрузка..\n§fВозвращайся через минуту!.`));
-      log("Перезапуск!"); mc.runcmd("stop");
-    } i--;
+function restart(reason = null) {
+  let sec = 10;
+  if (reason) mc.broadcast(`${config.title} Перезапуск по причине: ${reason}`);
+  const interval = setInterval(() => {
+    if (sec <= -1) {
+      clearInterval(interval);
+      mc.broadcast(`${config.title} Перезапуск!`, 5);
+      setTimeout(async () => {
+        mc.getOnlinePlayers().forEach((pl) => pl.disconnect(config.disconnectText));
+        await mc.runcmd("stop");
+      }, 1000);
+    } else {
+      mc.broadcast(`${config.title} Перезапуск через - ${sec} сек.`, 5);
+      sec--;
+    }
   }, 1000);
 }
 
 mc.listen("onServerStarted", () => {
-  var restart = mc.newCommand("restart", "Досрочный перезапуск сервера.", PermType.GameMasters);
-  restart.setCallback((_cmd, _ori) => Restart()); restart.overload([]); restart.setup();
-  log(`Отсчёт до рестарта запущен! Время: ${time_ms}ms. (Дни: ${config.time.day}, Часы: ${config.time.hour}, Минуты: ${config.time.min}, Секунды: ${config.time.sec})`);
-  restartTimeout = setTimeout(() => Restart(), time_ms);
+  const cmd = mc.newCommand("restart", "Досрочный перезапуск сервера.", PermType.GameMasters);
+  cmd.optional("reason", ParamType.RawText);
+  cmd.overload(["reason"]);
+  cmd.setCallback((_cmd, _ori, op, res) => {
+    op.success(`${config.title} Успешно.`);
+    clearTimeout(restartTimer);
+    restart(res.reason);
+  });
+  cmd.setup();
+  restartTimer = setTimeout(() => restart(), restartTime);
 });
