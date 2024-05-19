@@ -10,7 +10,7 @@
     ],
     "config": {
         "title": "§eAurum§fCraft §d»§e",
-        "disconnectText": "§eПререзапуск",
+        "disconnectText": "§eПрезапуск",
         "time": {
             "day": 0, "hour": 6,
             "min": 0, "sec": 0

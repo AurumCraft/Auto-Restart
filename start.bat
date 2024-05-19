@@ -1,20 +1,20 @@
 @chcp 65001>nul
-@echo off> nul
+@echo off
 
-@title AurumCraft [Sever] [Запуск...]
+@title AurumCraft [Server] [Запуск...]
 
 :run
 cd server
-title AurumCraft [Sever] [Работает]
+title AurumCraft [Server] [Работает]
 call bedrock_server_mod.exe
-title AurumCraft [Sever] [Выключение]
-сd ..
-title AurumCraft [Sever] [Создание Бекапа]
+title AurumCraft [Server] [Выключение]
+cd ..
+title AurumCraft [Server] [Создание Бекапа...]
 echo ---------------------------------
 echo          Создание Бекапа
 echo ---------------------------------
 call backup.bat
-title AurumCraft [Sever] [Перезапуск...]
+title AurumCraft [Server] [Перезапуск...]
 echo ---------------------------------
 echo            Перезапуск!
 echo ---------------------------------
