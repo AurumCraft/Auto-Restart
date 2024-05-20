@@ -22,7 +22,6 @@ echo ----------------------------------
 
 forfiles /p "%backupDir%" /s /m * /d -2 /c "cmd /c if @isdir==FALSE if @creationtime@ LEQ %cutoffDate% del @path"
 
-
 title AurumCraft [Server] [Создание Бекапа...]
 echo ---------------------------------
 echo          Создание Бекапа
