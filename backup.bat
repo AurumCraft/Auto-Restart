@@ -2,7 +2,6 @@
 @echo off>nul
 setlocal
 
-title AurumCraft [Server] [Очистка Бекапов...]
 for /f "tokens=2 delims==" %%I in ('"wmic os get localdatetime /value"') do set datetime=%%I
 set "YYYY=%datetime:~0,4%"
 set "MM=%datetime:~4,2%"
@@ -16,6 +15,7 @@ set "backupDir=C:\Users\alone\Desktop\AurumCraft\backups"
 set "source=C:\Users\alone\Desktop\AurumCraft\server\worlds"
 set "cutoffDate=%date:~6,4%-%date:~3,2%-%date:~0,2%"
 
+title AurumCraft [Server] [Очистка Бекапов...]
 echo ----------------------------------
 echo          Очистка Бекапов!
 echo ----------------------------------
