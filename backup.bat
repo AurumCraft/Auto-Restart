@@ -2,6 +2,7 @@
 @echo off>nul
 setlocal
 
+title AurumCraft [Server] [Очистка Бекапов...]
 for /f "tokens=2 delims==" %%I in ('"wmic os get localdatetime /value"') do set datetime=%%I
 set "YYYY=%datetime:~0,4%"
 set "MM=%datetime:~4,2%"
@@ -20,6 +21,12 @@ echo          Очистка Бекапов!
 echo ----------------------------------
 
 forfiles /p "%backupDir%" /s /m * /d -2 /c "cmd /c if @isdir==FALSE if @creationtime@ LEQ %cutoffDate% del @path"
+
+
+title AurumCraft [Server] [Создание Бекапа...]
+echo ---------------------------------
+echo          Создание Бекапа
+echo ---------------------------------
 
 tar -czvf "%archive%" -C "%source%" .
 
